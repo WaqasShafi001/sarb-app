@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
 import 'package:sarb_mobile_app/commons/appTextStyles.dart';
 import 'package:sarb_mobile_app/commons/sizeConfig.dart';
@@ -76,15 +77,17 @@ class DepositScreen extends StatelessWidget {
           UIHelper.verticalSpaceLarge(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            
             children: [
               RaisedGradientButton(
                 width: SizeConfig.blockSizeHorizontal! * 30,
                 height: SizeConfig.blockSizeVertical! * 6.5,
                 titleText: 'Back',
-                onPressed: () {
-                  Get.off(HomeScreen());
-                },
+                onPressed: () => pushNewScreen(
+                  context,
+                  screen: HomeScreen(),
+                  pageTransitionAnimation: PageTransitionAnimation.sizeUp,
+                  withNavBar: true,
+                ),
               ),
               RaisedGradientButton(
                 width: SizeConfig.blockSizeHorizontal! * 30,
