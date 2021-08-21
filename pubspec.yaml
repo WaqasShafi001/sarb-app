@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: any
   webview_flutter: any
+  persistent_bottom_nav_bar: any
 
 dev_dependencies:
   flutter_test:

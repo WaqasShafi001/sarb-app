@@ -5,7 +5,7 @@ import 'package:sarb_mobile_app/commons/appTextStyles.dart';
 import 'package:sarb_mobile_app/commons/sizeConfig.dart';
 import 'package:sarb_mobile_app/commons/uiHelper.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
-import 'package:sarb_mobile_app/widgets/commonButton.dart';
+import 'package:sarb_mobile_app/widgets/raisedGradientButton.dart';
 import 'package:sarb_mobile_app/widgets/textInputField.dart';
 
 import 'HomeScreen.dart';
@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 3.0;
+    timeDilation = 2.0;
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) => Container(
@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                   validationErrorMsg: 'Please enter your password',
                   textInputAction: TextInputAction.done,
                   prefixIcon: Icon(
-                    Icons.lock,
+                    Icons.vpn_key,
                     color: AppColors.darkGreen,
                   ),
                   cursorColor: AppColors.darkGreen,
@@ -80,16 +80,6 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => MainView());
                   },
-                  gradient: LinearGradient(
-                    colors: [
-                      AppColors.lightGreen,
-                      AppColors.darkGreen,
-                      AppColors.iron,
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomRight,
-                    stops: [0.10, 1, 1],
-                  ),
                 ),
               ],
             ),

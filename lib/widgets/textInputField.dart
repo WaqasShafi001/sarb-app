@@ -51,7 +51,7 @@ class TextInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: AppColors.iron,
-      margin: EdgeInsets.only(left: 30, right: 30, top: 30),
+      margin: EdgeInsets.only(left: 30, right: 30, top: 20),
       elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -60,6 +60,8 @@ class TextInputField extends StatelessWidget {
       ),
       child: TextFormField(
         textAlignVertical: TextAlignVertical.center,
+        style:
+            TextStyle(color: AppColors.darkGreen, fontWeight: FontWeight.w600),
         textAlign: TextAlign.left,
         readOnly: readOnlyText,
         textCapitalization: capitalization,

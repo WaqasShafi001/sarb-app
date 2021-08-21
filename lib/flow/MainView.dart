@@ -1,78 +1,111 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
-import 'package:sarb_mobile_app/commons/appTextStyles.dart';
 import 'package:sarb_mobile_app/commons/sizeConfig.dart';
 import 'package:sarb_mobile_app/flow/HomeScreen.dart';
+import 'package:sarb_mobile_app/widgets/doubleBackToCloseApp.dart';
 import 'package:sarb_mobile_app/widgets/webView.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
 
-  @override 
+  @override
   _MainViewState createState() => _MainViewState();
 }
 
 class _MainViewState extends State<MainView> {
+  PersistentTabController? _controller;
+  bool? _hideNavBar;
+
   void initState() {
     super.initState();
-    // Enable hybrid composition.
+
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    _controller = PersistentTabController(initialIndex: 0);
+    _hideNavBar = false;
   }
 
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    HomeScreen(),
-    Container(
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-      child: WebViewWidget(
-        title: 'Website titile',
-        initialUrl: 'https://pub.dev/packages/webview_flutter/install',
+  List<Widget> _buildScreens() {
+    return [
+      HomeScreen(),
+      Container(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        child:
+            WebViewWidget(title: 'Website', initialUrl: 'https://flutter.dev/'),
       ),
-    ),
-    Container(
-      color: Colors.tealAccent,
-    ),
-  ];
+      Container(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        child: WebViewWidget(
+            title: 'Feedback', initialUrl: 'https://flutter.dev/'),
+      ),
+    ];
+  }
 
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.home),
+        title: 'Home',
+        activeColorPrimary: AppColors.congoBrown,
+        inactiveColorPrimary: AppColors.white,
+        inactiveColorSecondary: AppColors.white,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.language),
+        title: 'Website',
+        activeColorPrimary: AppColors.congoBrown,
+        inactiveColorPrimary: AppColors.white,
+        inactiveColorSecondary: AppColors.white,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.feedback),
+        title: 'Feedback',
+        activeColorPrimary: AppColors.congoBrown,
+        inactiveColorPrimary: AppColors.white,
+        inactiveColorSecondary: AppColors.white,
+      ),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AppColors.white,
-        elevation: 3,
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        selectedItemColor: AppColors.congoBrown,
-        selectedLabelStyle: AppTextStyles.inputTextStyle,
-        items: [
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(
-              Icons.home,
-            ),
+      body: DoubleBackToCloseApp(
+        snackBar: const SnackBar(
+          elevation: 0,
+          behavior: SnackBarBehavior.fixed,
+          backgroundColor: AppColors.lightGreen,
+          content: Text(
+            'Tap back again to leave',
+            style: TextStyle(
+                color: AppColors.congoBrown,
+                fontSize: 18,
+                fontWeight: FontWeight.w500),
           ),
-          BottomNavigationBarItem(
-            label: 'Website',
-            icon: Icon(Icons.language),
-          ),
-          BottomNavigationBarItem(
-            label: 'Feedback',
-            icon: Icon(
-              Icons.feedback,
-            ),
-          ),
-        ],
+        ),
+        child: PersistentTabView(
+          context,
+          controller: _controller!,
+          screens: _buildScreens(),
+          items: _navBarsItems(),
+          confineInSafeArea: true,
+          resizeToAvoidBottomInset: true,
+          backgroundColor: AppColors.lightGreen,
+          handleAndroidBackButtonPress: true,
+          stateManagement: false,
+          navBarHeight: SizeConfig.blockSizeVertical! * 7.5,
+          hideNavigationBarWhenKeyboardShows: true,
+          selectedTabScreenContext: (context) {},
+          hideNavigationBar: _hideNavBar,
+          navBarStyle: NavBarStyle.style6,
+          screenTransitionAnimation:
+              ScreenTransitionAnimation(animateTabTransition: true),
+        ),
       ),
     );
   }

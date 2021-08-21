@@ -25,7 +25,17 @@ class RaisedGradientButton extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        gradient: gradient,
+        gradient: gradient ??
+            LinearGradient(
+              colors: [
+                AppColors.lightGreen,
+                AppColors.darkGreen,
+                AppColors.iron,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomRight,
+              stops: [0.10, 1, 1],
+            ),
         boxShadow: [
           BoxShadow(
             color: AppColors.lightGreen,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
+import 'package:sarb_mobile_app/commons/appTextStyles.dart';
 import 'package:sarb_mobile_app/commons/sizeConfig.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -7,7 +8,8 @@ class WebViewWidget extends StatefulWidget {
   final String? initialUrl;
   final String? title;
 
-  const WebViewWidget({Key? key, this.initialUrl, this.title}) : super(key: key);
+  const WebViewWidget({Key? key, this.initialUrl, this.title})
+      : super(key: key);
 
   @override
   _WebViewWidgetState createState() => _WebViewWidgetState();
@@ -21,7 +23,12 @@ class _WebViewWidgetState extends State<WebViewWidget> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: AppColors.lightGreen,
-          title: Text(widget.title!),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            widget.title!,
+            style: AppTextStyles.simpleText.copyWith(color: AppColors.congoBrown),
+          ),
         ),
         body: SafeArea(
           child: Stack(
