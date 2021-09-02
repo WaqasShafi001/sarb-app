@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
 import 'package:sarb_mobile_app/commons/appTextStyles.dart';
 import 'package:sarb_mobile_app/commons/sizeConfig.dart';
-import 'package:sarb_mobile_app/commons/uiHelper.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:sarb_mobile_app/widgets/raisedGradientButton.dart';
 import 'package:sarb_mobile_app/widgets/textInputField.dart';
 
-import 'HomeScreen.dart';
 import 'MainView.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -24,26 +22,30 @@ class LoginScreen extends StatelessWidget {
           width: constraints.maxWidth,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                UIHelper.verticalSpaceLarge(),
-                UIHelper.verticalSpaceMedium(),
-                UIHelper.verticalSpaceSmall(),
+                SizedBox(
+                  height: constraints.maxHeight * 0.08,
+                ),
                 Center(
                   child: Hero(
                     tag: 'applogo',
                     transitionOnUserGestures: true,
                     child: Image.asset(
                       'images/sarblogo.png',
+                      height: constraints.maxHeight * 0.22,
                     ),
                   ),
                 ),
-                UIHelper.verticalSpaceMedium(),
                 Align(
                   alignment: Alignment.center,
                   child: Text(
                     'Welcome',
                     style: AppTextStyles.simpleText,
                   ),
+                ),
+                SizedBox(
+                  height: constraints.maxHeight * 0.015,
                 ),
                 TextInputField(
                   hint: 'Username',
@@ -71,8 +73,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                   cursorColor: AppColors.darkGreen,
                 ),
-                UIHelper.verticalSpaceMedium(),
-                UIHelper.verticalSpaceLarge(),
+                SizedBox(
+                  height: constraints.maxHeight * 0.06,
+                ),
                 RaisedGradientButton(
                   width: SizeConfig.blockSizeHorizontal! * 86,
                   height: SizeConfig.blockSizeHorizontal! * 13,

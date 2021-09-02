@@ -79,12 +79,12 @@ class _MainViewState extends State<MainView> {
         snackBar: const SnackBar(
           elevation: 0,
           behavior: SnackBarBehavior.fixed,
-          backgroundColor: AppColors.lightGreen,
+          //backgroundColor: AppColors.lightGreen,
           content: Text(
             'Tap back again to leave',
             style: TextStyle(
-                color: AppColors.congoBrown,
-                fontSize: 18,
+                color: AppColors.white,
+                fontSize: 16,
                 fontWeight: FontWeight.w500),
           ),
         ),
@@ -98,7 +98,7 @@ class _MainViewState extends State<MainView> {
           backgroundColor: AppColors.lightGreen,
           handleAndroidBackButtonPress: true,
           stateManagement: false,
-          navBarHeight: SizeConfig.blockSizeVertical! * 7.5,
+          navBarHeight: SizeConfig.blockSizeVertical! * 8,
           hideNavigationBarWhenKeyboardShows: true,
           selectedTabScreenContext: (context) {},
           hideNavigationBar: _hideNavBar,

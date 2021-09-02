@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
 import 'package:sarb_mobile_app/commons/appTextStyles.dart';
 import 'package:sarb_mobile_app/commons/uiHelper.dart';
 import 'package:sarb_mobile_app/flow/AccVerificationScreen.dart';
 import 'package:sarb_mobile_app/widgets/OptionTile.dart';
-import 'package:sarb_mobile_app/widgets/doubleBackToCloseApp.dart';
 import 'package:sarb_mobile_app/widgets/exitAppDialog.dart';
 
 import 'CheckBalanceScreen.dart';

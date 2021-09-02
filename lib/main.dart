@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
 
-import 'commons/sizeConfig.dart';
 import 'flow/SplashScreen.dart';
 
 void main() {

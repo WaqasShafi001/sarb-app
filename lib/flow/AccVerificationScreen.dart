@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sarb_mobile_app/commons/appColors.dart';
 import 'package:sarb_mobile_app/commons/appTextStyles.dart';
@@ -16,51 +15,58 @@ class DepositVerificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.lightGreen,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          'Verification',
-          style: AppTextStyles.simpleText.copyWith(color: AppColors.congoBrown),
-        ),
-      ),
-      body: Column(
-        children: [
-          UIHelper.verticalSpaceSmall(),
-          Card(
-            elevation: 3,
-            child: Image.asset('images/banner.png'),
+        appBar: AppBar(
+          backgroundColor: AppColors.lightGreen,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            'Verification',
+            style:
+                AppTextStyles.simpleText.copyWith(color: AppColors.congoBrown),
           ),
-          UIHelper.verticalSpaceLarge(),
-          UIHelper.verticalSpaceLarge(),
-          TextInputField(
-            readOnlyText: false,
-            cursorColor: AppColors.darkGreen,
-            hint: 'Account Number',
-            textInputAction: TextInputAction.done,
-            prefixIcon: Icon(
-              Icons.account_box,
-              color: AppColors.darkGreen,
+        ),
+        body: LayoutBuilder(
+          builder: (context, constraints) => Container(
+            height: constraints.maxHeight,
+            width: constraints.maxWidth,
+            child: Column(
+              children: [
+                UIHelper.verticalSpaceSmall(),
+                Card(
+                  elevation: 3,
+                  child: Image.asset('images/banner.png'),
+                ),
+                SizedBox(
+                  height: constraints.maxHeight * 0.1,
+                ),
+                TextInputField(
+                  readOnlyText: false,
+                  cursorColor: AppColors.darkGreen,
+                  hint: 'Account Number',
+                  textInputAction: TextInputAction.done,
+                  prefixIcon: Icon(
+                    Icons.account_box,
+                    color: AppColors.darkGreen,
+                  ),
+                ),
+                UIHelper.verticalSpaceMedium(),
+                RaisedGradientButton(
+                    titleText: 'VERIFY',
+                    width: SizeConfig.blockSizeHorizontal! * 86,
+                    height: SizeConfig.blockSizeHorizontal! * 13,
+                    onPressed: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+
+                      pushNewScreen(
+                        context,
+                        screen: DepositScreen(),
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                        withNavBar: true,
+                      );
+                    })
+              ],
             ),
           ),
-          UIHelper.verticalSpaceMedium(),
-          RaisedGradientButton(
-              titleText: 'VERIFY',
-              width: SizeConfig.blockSizeHorizontal! * 86,
-              height: SizeConfig.blockSizeHorizontal! * 13,
-              onPressed: () {
-                FocusScope.of(context).requestFocus(FocusNode());
-
-                pushNewScreen(
-                  context,
-                  screen: DepositScreen(),
-                  pageTransitionAnimation: PageTransitionAnimation.fade,
-                  withNavBar: true,
-                );
-              })
-        ],
-      ),
-    );
+        ));
   }
 }
